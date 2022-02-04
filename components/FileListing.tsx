@@ -328,16 +328,16 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
         <div className="dark:bg-gray-900 dark:text-gray-100 bg-white rounded">
           <div className="dark:border-gray-500/30 grid items-center grid-cols-12 px-3 space-x-2 border-b border-gray-900/10">
             <div className="md:col-span-6 col-span-12 font-bold py-2 text-gray-600 dark:text-gray-300 uppercase tracking-widest text-xs">
-              Name
+              文件名
             </div>
             <div className="md:block hidden col-span-3 font-bold text-gray-600 dark:text-gray-300 uppercase tracking-widest text-xs">
-              Last Modified
+              上传时间
             </div>
             <div className="md:block hidden font-bold text-gray-600 dark:text-gray-300 uppercase tracking-widest text-xs">
-              Size
+              文件大小
             </div>
             <div className="md:block hidden font-bold text-gray-600 dark:text-gray-300 uppercase tracking-widest text-xs">
-              Actions
+              操作
             </div>
             <div className="md:block hidden font-bold text-gray-600 dark:text-gray-300 uppercase tracking-widest text-xs">
               <div className="md:flex dark:text-gray-400 hidden p-1.5 text-gray-700">
@@ -345,13 +345,13 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
                   checked={totalSelected}
                   onChange={toggleTotalSelected}
                   indeterminate={true}
-                  title={'Select files'}
+                  title={'选择文件'}
                 />
                 {totalGenerating ? (
-                  <Downloading title="Downloading selected files, refresh page to cancel" />
+                  <Downloading title="下载选中文件中,刷新页面取消..." />
                 ) : (
                   <button
-                    title="Download selected files"
+                    title="下载选中文件夹中"
                     className="hover:bg-gray-300 dark:hover:bg-gray-600 p-1.5 rounded cursor-pointer disabled:text-gray-400 disabled:dark:text-gray-600 disabled:hover:bg-white disabled:hover:dark:bg-gray-900 disabled:cursor-not-allowed"
                     disabled={totalSelected === 0}
                     onClick={handleSelectedDownload}
@@ -422,7 +422,7 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
               {c.folder ? (
                 <div className="md:flex dark:text-gray-400 hidden p-1.5 text-gray-700">
                   <span
-                    title="Copy folder permalink"
+                    title="复制文件夹直链"
                     className="hover:bg-gray-300 dark:hover:bg-gray-600 px-1.5 py-1 rounded cursor-pointer"
                     onClick={() => {
                       clipboard.copy(`${getBaseUrl()}${path === '/' ? '' : path}/${encodeURIComponent(c.name)}`)
@@ -432,10 +432,10 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
                     <FontAwesomeIcon icon={['far', 'copy']} />
                   </span>
                   {folderGenerating[c.id] ? (
-                    <Downloading title="Downloading folder, refresh page to cancel" />
+                    <Downloading title="下载选中文件夹中,刷新页面取消..." />
                   ) : (
                     <span
-                      title="Download folder"
+                      title="下载文件夹"
                       className="hover:bg-gray-300 dark:hover:bg-gray-600 px-1.5 py-1 rounded cursor-pointer"
                       onClick={() => {
                         const p = `${path === '/' ? '' : path}/${encodeURIComponent(c.name)}`
@@ -449,7 +449,7 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
               ) : (
                 <div className="md:flex dark:text-gray-400 hidden p-1.5 text-gray-700">
                   <span
-                    title="Copy raw file permalink"
+                    title="复制文件直链"
                     className="hover:bg-gray-300 dark:hover:bg-gray-600 px-1.5 py-1 rounded cursor-pointer"
                     onClick={() => {
                       clipboard.copy(
@@ -461,7 +461,7 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
                     <FontAwesomeIcon icon={['far', 'copy']} />
                   </span>
                   <a
-                    title="Download file"
+                    title="下载文件中"
                     className="hover:bg-gray-300 dark:hover:bg-gray-600 px-1.5 py-1 rounded cursor-pointer"
                     href={c['@microsoft.graph.downloadUrl']}
                   >
@@ -518,10 +518,10 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
                     </svg>
                   </>
                 ) : isReachingEnd ? (
-                  <span>No more files</span>
+                  <span>到底了^_^</span>
                 ) : (
                   <>
-                    <span>Load more</span>
+                    <span>加载更多</span>
                     <FontAwesomeIcon icon="chevron-circle-down" />
                   </>
                 )}
